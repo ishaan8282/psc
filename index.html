@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+  <div id="navbar">
+
+  </div>
+   <div><a href="dashboard.html">Dashboard</a></div> 
+     <form  onsubmit="Studentdetails(event)" id="form">
+        <input type="text" id="name" placeholder="Enter Name" />
+        <input type="text" id="course" placeholder="Enter Course"/>
+        <input type="text" id="unit" placeholder="Enter unit"/>
+        <input type="url" id="imgUrl" placeholder="Enter ImageUrl"/>
+        <input type="text" id="batch" placeholder="Enter Batch"/>
+        <input id="add" type="submit">
+     </form>
+</body>
+</html>
+<script>
+
+  function student(n,c,u,i,b)
+  {
+    this.name = n;
+    this.course = c;
+    this.unit = u;
+    this.image = i;
+    this.batch = b;
+  }
+   
+
+   function Studentdetails(event){
+     event.preventDefault()
+
+     let form = document.getElementById('form')
+
+     let name = form.name.value;
+     let course = form.name.value;
+     let unit = form.unit.value;
+     let image = form.imgUrl.value;
+     let batch = form.batch.value;
+
+    //  console.log(name,course,unit,image,batch)
+     let s1 = new student(name,course,unit,image,batch)
+    //  console.log(s1)
+     let data = JSON.parse(localStorage.getItem("students")) || []
+
+     data.push(s1)
+    //  console.log(data)
+     
+     localStorage.setItem("students",JSON.stringify(data))
+
+   }
+
+   function calculate()
+   {
+    let data = JSON.parse(localStorage.getItem("students")) || []
+
+    let obj = {}
+
+    for(let i=0; i<data.length; i++)
+    {
+       if(!obj[data[i].batch])
+       {
+         obj[data[i].batch] = 0
+       }
+    }
+    for(let i=0; i<data.length; i++)
+    {
+       
+         obj[data[i].batch]++
+       
+    }
+    console.log(obj)
+
+    // let ptag = document.createElement("p")
+    // ptag.innerText = obj;
+    // let div = document.createElement("div")
+    //    div.append(ptag)
+
+   }
+   calculate()
+
+    // function studentdatabase(name,course,unit,image,batch)
+    // {
+    //     this.name = name;
+    //     this.course = course;
+    //     this.unit = unit;
+    //     this.image = image;
+    //     this.batch = batch;
+    // }
+
+    // function Studentdetails(event)
+    // {
+    //     event.preventDefault()
+    //   let form = document.getElementById("form")
+
+    //   let name = form.name.value
+    //   let course = form.course.value
+    //   let unit = form.unit.value
+    //   let image = form.imgUrl.value
+    //   let batch = form.batch.value
+
+
+      
+    //   let s1 = new studentdatabase(name,course,unit,image,batch)
+      
+    //   let data = JSON.parse(localStorage.getItem("students"))||[]
+      
+    //   data.push(s1)
+    //   //console.log(arr)
+
+
+    //   localStorage.setItem("students",JSON.stringify())
+    //   // let btn = document.querySelector("#add")
+    //   // btn.addEventListener("click",function(){
+    //   //     localStorage.setItem("database",JSON.stringify(arr))
+    //   //   //   window.location.href = "product.html"
+    //   // })
+    // }
+</script>
